@@ -9,6 +9,7 @@ vagrant up
 vagrant provision
 vagrant rebuild
 vagrant halt
+vagrant snapshot
 vagrant destroy
 
 cd ..

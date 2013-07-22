@@ -21,6 +21,11 @@ module VagrantPlugins
         require_relative 'commands/rebuild'
         Commands::Rebuild
       end
+
+      command(:snapshot) do
+        require_relative 'commands/snapshot'
+        Commands::Snapshot
+      end
     end
   end
 end

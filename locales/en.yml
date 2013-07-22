@@ -17,12 +17,14 @@ en:
       using_key: "Using existing SSH key: %{name}"
       creating_key: "Creating new SSH key: %{name}..."
       rsyncing: "Rsyncing folder: %{hostpath} => %{guestpath}..."
+      taking_snapshot: "Taking snapshot for the droplet..."
     config:
       client_id: "Client ID is required"
       api_key: "API key is required"
       private_key: "SSH private key path is required"
       public_key: "SSH public key not found: %{key}"
     errors:
+      active_snapshot: "The droplet you're trying to snapshot is currently active, please power it off before trying to snapshot."
       public_key: |-
         There was an issue reading the public key at:
 

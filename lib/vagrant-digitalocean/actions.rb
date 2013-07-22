@@ -10,6 +10,7 @@ require 'vagrant-digitalocean/actions/setup_sudo'
 require 'vagrant-digitalocean/actions/setup_key'
 require 'vagrant-digitalocean/actions/sync_folders'
 require 'vagrant-digitalocean/actions/modify_provision_path'
+require 'vagrant-digitalocean/actions/snapshot'
 
 module VagrantPlugins
   module DigitalOcean
@@ -144,6 +145,22 @@ module VagrantPlugins
               b.use SetupSudo
               b.use SetupUser
               b.use provision
+            when :not_created
+              env[:ui].info I18n.t('vagrant_digital_ocean.info.not_created')
+            end
+          end
+        end
+      end
+
+      def self.snapshot
+        return Vagrant::Action::Builder.new.tap do |builder|
+          builder.use ConfigValidate
+          builder.use Call, CheckState do |env, b|
+            case env[:machine_state]
+            when :active
+              env[:ui].info I18n.t('vagrant_digital_ocean.errors.active_snapshot')
+            when :off
+              b.use Snapshot
             when :not_created
               env[:ui].info I18n.t('vagrant_digital_ocean.info.not_created')
             end
